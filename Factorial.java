@@ -1,25 +1,27 @@
 package com.incubtasks;
 import java.util.Scanner;
+import java.math.BigInteger;
 public class Factorial {
-	public static int generateFactorial(int number)
+	
+	public static BigInteger generateFactorial(int number)
 	{
-		if(number<=1)
+		
+		BigInteger result=new BigInteger("1");
+		for(int i=2;i<=number;i++)
 		{
-			return 1;
+			result=result.multiply(BigInteger.valueOf(i));
 		}
-		else
-		{
-			return number*generateFactorial(number-1);
-		}
+		return result;
 	}
 public static void main(String[] args) {
 	Scanner sc=new Scanner(System.in);
 	System.out.println("Enter the number for which factorial is to be found :");
 	int number=sc.nextInt();
+	BigInteger bi=new BigInteger("1");
 	if(number>=0)
 	{
 	
-	int factorial=generateFactorial(number);
+	BigInteger factorial=generateFactorial(number);
 	System.out.println("Factorial of the given number is: "+factorial);
 	}
 	else
