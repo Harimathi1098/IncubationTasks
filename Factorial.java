@@ -3,13 +3,14 @@ import java.util.Scanner;
 public class Factorial {
 	public static int generateFactorial(int number)
 	{
-		int factorialArray[]=new int[number+1];
-		factorialArray[0]=1;
-		for(int i=1;i<=number;i++)
+		if(number<=1)
 		{
-			factorialArray[i]=i*factorialArray[i-1];
+			return 1;
 		}
-		return factorialArray[number];
+		else
+		{
+			return number*generateFactorial(number-1);
+		}
 	}
 public static void main(String[] args) {
 	Scanner sc=new Scanner(System.in);
