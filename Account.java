@@ -10,7 +10,7 @@ class InvalidAgeException  extends RuntimeException
     }  
 }  
     
-public class Account
+public class Votevalidation
 {  
   
    
