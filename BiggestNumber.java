@@ -25,8 +25,8 @@ public class BiggestNumber {
 		integerArray[i]=scan.nextInt();
 	}
 	
-	int biggestNumber=findBiggestNumber(integerArray);
-	System.out.println("The biggest number in the given array is: "+ biggestNumber);
+	int result=findBiggestNumber(integerArray);
+	System.out.println("The biggest number in the given array is: "+ result);
 
 	}
 

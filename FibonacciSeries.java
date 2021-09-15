@@ -1,10 +1,10 @@
 package com.incubtasks;
 import java.util.Scanner;
 public class FibonacciSeries {
-	public static int[] generateFibonacciSeries(int number)
+	public static int[] generateFibonacciSeries(int number,int firstTerm)
 	{
 		int fibonaccciSeriesArray[]=new int[number];
-		fibonaccciSeriesArray[0]=0;
+		fibonaccciSeriesArray[0]=firstTerm;
 		fibonaccciSeriesArray[1]=1;
 		for(int i=2;i<fibonaccciSeriesArray.length;i++)
 		{
@@ -17,7 +17,9 @@ public class FibonacciSeries {
 		System.out.println("Enter the number for which fibonacci series need to be printed:");
 		int number=scan.nextInt();
 		if(number>0) {	
-		int fibonacciSeriesArray[]=generateFibonacciSeries(number);
+			System.out.println("Enter the first term for fibonacci number");
+			int firstTerm=scan.nextInt();
+		int fibonacciSeriesArray[]=generateFibonacciSeries(number,firstTerm);
 		System.out.println("----The Fibonacci Series for the given number----");
 		for(int i=0;i<fibonacciSeriesArray.length;i++)
 		{

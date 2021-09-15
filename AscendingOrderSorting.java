@@ -6,6 +6,8 @@ public class AscendingOrderSorting {
 	public static void merge(int[] integerArray,int low,int middle,int high)
 	
 	{
+		
+		
 		int i=low;
 		int j=middle+1;
 		int k=low;
