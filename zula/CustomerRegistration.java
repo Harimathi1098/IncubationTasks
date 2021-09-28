@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CustomerRegistration extends Customer {
-	
+public class CustomerRegistration {
+	String name;
+	String password;
+	int age;
 	public CustomerRegistration()
 	{
 		
