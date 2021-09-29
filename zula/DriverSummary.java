@@ -26,7 +26,7 @@ public class DriverSummary {
 				con=DriverManager.getConnection(url,username,password);							
 				Statement st=con.createStatement();
 		
-		    String sqlquery="select * from driver d,book_rides br where d.driver_id=br.driver_id order by pickup_time desc;";
+		    String sqlquery="select * from driver ;";
 		    ResultSet set2=st.executeQuery(sqlquery);
 			while(set2.next())
 			{
@@ -114,8 +114,7 @@ catch (SQLException e) {
 					
 					
 	 driverlist.add(driver);
-					System.out.println(set2.getString("source")+"         "+set2.getString("Destination")+"                "+
-				set2.getInt("Customer_id")+"                "+set2.getDouble("Total_Fare")+"                 "+set2.getDouble("zula_commission"));
+					
 				}
 			}
 			
@@ -138,78 +137,5 @@ catch (SQLException e) {
 			}
 			return driverlist;
 	}
-	public void showDriverDetails(String name)
-	{
-		
-		
-		   String url="jdbc:mysql://localhost:3306/zula";
-			String username="root";
-			String password="Secret";
-		Connection con=null;			
-		ResultSet set=null;
-		int setlength=0;
-		int did=0;
-		int rides=0;
-			try {
-				con=DriverManager.getConnection(url,username,password);
-							
-				Statement st=con.createStatement();
-		
-			ResultSet set1=st.executeQuery("select * from driver;");
-			
-			
-			while(set1.next())
-			{
-				if(set1.getString("driver_name").equals(name))
-				{
-					did=set1.getInt("driver_id");
-					rides=set1.getInt("no_of_rides");
-				}
-			}
-			
-			ResultSet set2=st.executeQuery("Select * from book_rides;");
-			
-				System.out.println("Driver id is :"+did);
-				System.out.println("Driver name is :"+name);
-				if(rides>0)
-				{
-				System.out.println("----------------------Trip Details--------------------");
-				System.out.println("Source    Destination    CustomerDetails     Fare          ZulaCommission");
-			while(set2.next()) 
-			{
-				if(set2.getInt("driver_id")==did)
-				{
-					/*driverlist.add(did);
-					driverlist.add(name);
-					driverlist.add(set2.getString("source"));
-					driverlist.add(set2.getString("Destination"));
-					driverlist.add(set2.getInt("Customer_id"));
-					driverlist.add(set2.getInt("Total_Fare"));
-					driverlist.add(set2.getInt("zula_commission"));*/
-					
-					
-					System.out.println(set2.getString("source")+"         "+set2.getString("Destination")+"                "+
-				set2.getInt("Customer_id")+"                "+set2.getDouble("Total_Fare")+"                 "+set2.getDouble("zula_commission"));
-				}
-			}
-				}
-				else
-					
-				{
-					System.out.println("No rides were given");
-				}
-			
-			
-		
-		con.close();
-			} 
-			
-			catch (SQLException e) {
-				
-				e.printStackTrace();
-				System.out.println("SQL Exception Caught");
-			}
-	}
-
-
+	
 }
