@@ -61,7 +61,7 @@ public class ZulaApi {
 	
 	
 	@GET
-	@Path("/admin")
+	@Path("/admin/summary")
 	@Produces(MediaType.APPLICATION_JSON)
 	
 	public ArrayList displayAdminDetails()
@@ -104,35 +104,32 @@ public class ZulaApi {
 	@Path("/customer/login")	
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)	
-	public CustomerAuthentication  isvalidCustomer(CustomerAuthentication customerdetails)
+	public Customer  isvalidCustomer(Customer customerdetails)
 	{
-		String s="Authentication Failed";
-		int value=0;
-			
-		
-		CustomerAuthentication authenticate=new CustomerAuthentication(customerdetails);
-		
+	      		
+		Customer customer=new Customer();
+		CustomerAuthentication authenticate=new CustomerAuthentication();
 		try {
-		value=authenticate.customerAuthentication(customerdetails);
+		customer=authenticate.customerAuthentication(customerdetails);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
 		
-		authenticate.display(value);
-		return authenticate;
+		return customer;
 	}
 	
 	
 	@POST
 	@Path("/customer/registration")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)	
-	public String registerCustomer(CustomerRegistration customer) throws SQLException
+	@Produces(MediaType.APPLICATION_JSON)	
+	public Customer registerCustomer(Customer customer) throws SQLException
 	{
+		Customer cust=new Customer();
 		CustomerRegistration register=new CustomerRegistration();
-		String s=register.customerRegistration(customer);
-		return s;
+		customer=register.customerRegistration(customer);
+		return customer ;
 	}
 	
 	
@@ -147,17 +144,30 @@ public class ZulaApi {
 		return bo;
 	}
 	
+
+	@GET
+	@Path("/admin/driver")
+	@Produces(MediaType.APPLICATION_JSON)
+	
+	public ArrayList displayDriverDetails()
+	{
+		ArrayList al=new ArrayList();
+		System.out.println("success....");
+		DriverSummary driver=new DriverSummary();
+		al=driver.displayDriverDetails();
+		return al;
+	}
 	
 	@POST
-	@Path("/customer/booktaxi/{name}/final")
+	@Path("/customer/booktaxi/{id}/final")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public BookTaxi bookTaxi(@PathParam("name")String name,BookTaxi book) throws SQLException
+	public BookTaxi bookTaxi(@PathParam("id")int id,BookTaxi book) throws SQLException
 	{
 		//System.out.println("hello");		
 		
 		BookTaxi booktaxi=new BookTaxi();	
-		booktaxi=booktaxi.bookTaxi(name, book);
+		booktaxi=booktaxi.bookTaxi(id, book);
 	    return booktaxi;
 			
 	}

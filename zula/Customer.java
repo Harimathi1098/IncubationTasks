@@ -1,81 +1,97 @@
 package org.zulacabs.zulacabs;
 
-import javax.xml.bind.annotation.XmlElement;
-
-public class Customer {
-	
-int id;
-String name;
-String password;
-String Source;
+public class Customer {	
+String customername;
+String customerpassword;
 int customerid;
-int driverid;
-String Destination;
 double totalfare;
 int age;
-boolean loggedin=false;
-public Customer(int customerid, String name, String source, String destination, int driverid,double totalfare)
-{
-
-this.customerid = customerid;
-this.name = name;
-Source = source;
-Destination = destination;
-this.driverid=driverid;
-this.totalfare = totalfare;
-
+int error=-1;
+String source;
+String destination;
+int driverid;
+String pickuptime;
+public Customer(int customerid,String source, String destination,int driverid,double totalfare,String pickuptime) {
+	
+	this.customerid = customerid;
+	this.totalfare = totalfare;
+	this.source = source;
+	this.destination = destination;
+	this.driverid=driverid;
+	this.pickuptime=pickuptime;
 }
-public Customer(String name,String password,int age)
-{
-	this.name=name;
-	this.password=password;
-	this.age=age;
+public String getPickuptime() {
+	return pickuptime;
 }
-public Customer() {
-	// TODO Auto-generated constructor stub
+public void setPickuptime(String pickuptime) {
+	this.pickuptime = pickuptime;
 }
-@XmlElement(name="CustomerId")
-public int getId() {
-return customerid;
-}
-public void setId(int customerid) {
-this.customerid = customerid;
-}
-@XmlElement(name="CustomerName")
-public String getName() {
-return name;
-}
-public void setName(String name) {
-this.name = name;
-}
-@XmlElement(name="Driverid")
-public int getDriverId() {
-return driverid;
-}
-public void setDriverId(int driverid) {
-this.driverid = driverid;
-}
-@XmlElement(name="source")
 public String getSource() {
-return Source;
+	return source;
 }
 public void setSource(String source) {
-Source = source;
+	this.source = source;
 }
-@XmlElement(name="destination")
 public String getDestination() {
-return Destination;
+	return destination;
 }
 public void setDestination(String destination) {
-Destination = destination;
+	this.destination = destination;
 }
-@XmlElement(name="totalfare")
+public int getDriverid() {
+	return driverid;
+}
+public void setDriverid(int driverid) {
+	this.driverid = driverid;
+}
+String message;
+public Customer()
+{
+	
+}
+public String getMessage() {
+	return message;
+}
+public void setMessage(String message) {
+	this.message = message;
+}
+public String getCustomername() {
+	return customername;
+}
+public void setCustomername(String customername) {
+	this.customername = customername;
+}
+public String getCustomerpassword() {
+	return customerpassword;
+}
+public void setCustomerpassword(String customerpassword) {
+	this.customerpassword = customerpassword;
+}
+public int getCustomerid() {
+	return customerid;
+}
+public void setCustomerid(int customerid) {
+	this.customerid = customerid;
+}
 public double getTotalfare() {
-return totalfare;
+	return totalfare;
 }
 public void setTotalfare(double totalfare) {
-this.totalfare = totalfare;
+	this.totalfare = totalfare;
 }
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+public int getError() {
+	return error;
+}
+public void setError(int error) {
+	this.error = error;
+}
+
 
 
 }

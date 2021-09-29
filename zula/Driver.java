@@ -13,6 +13,13 @@ public class Driver {
 int id;
 String name;
 String Source;
+String time;
+public String getTime() {
+	return time;
+}
+public void setTime(String time) {
+	this.time = time;
+}
 public int getCustomerid() {
 	return customerid;
 }
@@ -22,7 +29,7 @@ public void setCustomerid(int customerid) {
 int customerid;
 String Destination;
 
-public Driver(int id, String name, String source, String destination, int customerid,double totalfare, double zulacommission) {
+public Driver(int id, String name, String source, String destination, int customerid,double totalfare, double zulacommission,String time) {
 super();
 this.id = id;
 this.name = name;
@@ -31,6 +38,17 @@ Destination = destination;
 this.customerid=customerid;
 this.totalfare = totalfare;
 this.zulacommission = zulacommission;
+this.time=time;
+}
+
+public Driver(int id, String name, double totalfare, double zulacommission) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.totalfare = totalfare;
+	this.zulacommission = zulacommission;
+	
+	
 }
 @XmlElement(name="ID")
 public int getId() {

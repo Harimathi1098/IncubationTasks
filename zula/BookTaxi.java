@@ -12,6 +12,13 @@ import java.sql.Statement;
 public class BookTaxi {
 	String pickuppoint;
 	String droppoint;
+	String time;
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	int driveid;
 	double totalfare;
 	int message=-1;
@@ -74,15 +81,7 @@ public class BookTaxi {
 		}
 		return locationdetails;
 	}
-	public static boolean checkLocation(char location)
-	{
-		if(location>='A'&&location<='H')
-		{
-			return true;
-		}
-		else
-			return false;
-	}
+	
 	public BookTaxi getFare(BookTaxi book)
 	{
 		BookTaxi boo=new BookTaxi();
@@ -176,7 +175,7 @@ public class BookTaxi {
 	public static void setDriverid(int driverid) {
 		BookTaxi.driverid = driverid;
 	}
-	public BookTaxi bookTaxi(String name,BookTaxi book)
+	public BookTaxi bookTaxi(int id,BookTaxi book)
 	{
 		BookTaxi boook=new BookTaxi();
 		String result1="Not Booked";
@@ -191,12 +190,12 @@ public class BookTaxi {
 		System.out.println("-----------------------------------------------------------------------------");
 		System.out.println("Enter the pickup point:");
 		
-		{
+		
 		String url="jdbc:mysql://localhost:3306/zula";
 		String username="root";
 		String password="Secret";
 		Connection con=null;			
-		ResultSet set=null;
+		ResultSet set2=null;
 		ResultSet set1=null;
 		int value1=0;
 		int value2=0;
@@ -208,27 +207,8 @@ public class BookTaxi {
 		
 		String pp=book.pickuppoint;
 		String dp=book.droppoint;
-		try {
-			con=DriverManager.getConnection(url,username,password);
-			 String sqlquery="select customer_name,customer_id from customer;";
 		
-			Statement sta=con.createStatement();
-			
-			set=sta.executeQuery(sqlquery);		
-			
-			while(set.next())
-			{
-				if(set.getString("Customer_Name").contentEquals(name))
-				{
-					cid=set.getInt("Customer_id");
-				}
-			}
-		}
-                   catch (SQLException e) {
-			
-			e.printStackTrace();
-			System.out.println("SQL Exception Caught");
-		}
+		cid=id;
 		
 		try {
 			con=DriverManager.getConnection(url,username,password);
@@ -236,17 +216,17 @@ public class BookTaxi {
 		
 			Statement sta=con.createStatement();
 			
-			set=sta.executeQuery(sqlquery);		
+			set2=sta.executeQuery(sqlquery);		
 			
-			while(set.next())
+			while(set2.next())
 			{
-				if(set.getString("location").equals(pp))
+				if(set2.getString("location").equals(pp))
 				{
-					value1=set.getInt("val");
+					value1=set2.getInt("val");
 				}
-				if(set.getString("location").equals(dp))
+				if(set2.getString("location").equals(dp))
 				{
-					value2=set.getInt("val");
+					value2=set2.getInt("val");
 				}
 				
 			}
@@ -284,7 +264,7 @@ public class BookTaxi {
 			boook.driveid=did;
 					boook.pickuppoint=book.pickuppoint;
 					boook.droppoint=book.droppoint;
-					
+					boook.time=book.time;
 		}
 		catch (SQLException e) {
 			
@@ -300,7 +280,7 @@ public class BookTaxi {
 		try {
 				Connection con6=DriverManager.getConnection(url,username,password);			
 				
-		        String customersql="insert into book_rides(customer_id,driver_id,source,destination,Total_fare,zula_commission)values(?,?,?,?,?,?)";
+		        String customersql="insert into book_rides(customer_id,driver_id,source,destination,Total_fare,zula_commission,pickup_time)values(?,?,?,?,?,?,?)";
 				PreparedStatement customerstatement=con.prepareStatement(customersql);
 					
 				customerstatement.setInt(1, cid);
@@ -309,6 +289,7 @@ public class BookTaxi {
 				customerstatement.setString(4, dp);	
 				customerstatement.setDouble(5, fare);	
 				customerstatement.setDouble(6, zulacommission);	
+				customerstatement.setString(7, book.time);	
 				
 				customerstatement.execute();
 				//con6.close();
@@ -328,6 +309,7 @@ public class BookTaxi {
 				driverstatement.setDouble(3,(result.getDouble("total_earnings")+fare-zulacommission));
 				driverstatement.setDouble(4,result.getDouble("fare")+fare);
 				driverstatement.setInt(5, did);
+				
 					}
 				}
 				driverstatement.execute();
@@ -351,7 +333,7 @@ public class BookTaxi {
 				e.printStackTrace();
 			}
 	        
-		}
+		
 		
 		
 		return boook;
