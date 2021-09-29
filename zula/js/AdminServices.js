@@ -28,7 +28,8 @@ const history=useHistory();
       fetch("http://localhost:8080/zulacabs/zulacabs/zulaapi/admin/summary")
       .then(resp=>(resp.json()))
       .then(resp=>
-        {console.log(resp)
+        {
+            console.log(resp)
           setAdminSummary(resp)
         })
       .catch(e=>console.log(e))
@@ -39,19 +40,23 @@ const history=useHistory();
       console.log(driver.length)
       if(i<driver.length)
       {
-             seti(i);
+          history.push=("/AdminServices")
+      seti(i+1);
       }
-      else
-      {
-     
-     seti(1)
-      }
-    }
-   /* function goBack()
+      else if(i==driver.length){
+          seti(1)
+      }}
+    function goBack()
     {
-       
-        
-    }*/
+        if(i>1)
+        {
+            seti(i-1);
+        }
+        else if(i==1)
+        {
+            seti(4);
+        }
+    }
 
   
   
@@ -111,7 +116,10 @@ return(
         }
         </tbody>
      </table>
-     <input id="button" type="button" value="Previous" /*onClick={/*goBack}*/ />
+     <br />
+     <br />
+     <input id="button" type="button" value="Previous" onClick={goBack} />
+     
      <input id="button" type="button" value="Next" onClick={proceed} />
     
     
