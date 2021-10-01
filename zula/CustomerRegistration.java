@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class CustomerRegistration extends Customer {
 	
-	public Customer customerRegistration(Customer customer) throws SQLException
+	public synchronized Customer customerRegistration(Customer customer) throws SQLException
 	{
 		Customer cust=new Customer();
 		String url="jdbc:mysql://localhost:3306/zula";
