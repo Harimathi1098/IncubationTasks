@@ -4,7 +4,11 @@ import React,{useState,useEffect} from 'react';
 import { useHistory } from 'react-router';
 function FinalBookingDetails()
 {
-   
+     const history=useHistory()
+    setTimeout(() => {
+        history.push('/CustomerServices');
+        }, 10000);
+      
     
 return(
     <div>
@@ -36,7 +40,7 @@ return(
                 <th> Driver ID: </th>
                 <td> {localStorage.getItem("driverid")}</td>
                 </tr>
-                             
+                 <p>Redirecting to Customer Summary in 10 seconds.....</p>            
                  <p className="final">Thanks for choosing Zula cabs!!</p>
                  <p className="final">Have a Safe Ride!!!!</p>
 
