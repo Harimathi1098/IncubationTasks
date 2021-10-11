@@ -38,17 +38,7 @@ class JWT {
 	
 	public boolean isVaildToken(String token)
 	{
-		boolean s=false;
-		if(getClaims(token).getExpiration().before(new Date(System.currentTimeMillis())))
-		{
-			s=false;
-		}
-		if(getClaims(token).getExpiration().after(new Date(System.currentTimeMillis())))
-			
-		{
-			s=true;
-		}
-		return s;
+		return getClaims(token).getExpiration().after(new Date(System.currentTimeMillis()));
 	}
 	
 
